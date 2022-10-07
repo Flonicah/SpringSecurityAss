@@ -54,8 +54,8 @@ public class UserController {
         return userService.updateUserRole(userName, role, currentUser);
     }
 
-    @PutMapping("disable-account/{userName}")
-
+    @PutMapping("disable-account/{userName}") //ADMIN only can disable the account of the users in the system
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
 
     public ResponseEntity<ApiResponse> disableAccount(@PathVariable("userName") String userName){
         return userService.disableAccount(userName);
