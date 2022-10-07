@@ -2,11 +2,10 @@ package com.spring.security.demo.user;
 
 import com.spring.security.demo.commons.ApiResponse;
 import com.spring.security.demo.user.hateoas.UserModel;
-import org.springframework.boot.context.properties.bind.DefaultValue;
 import org.springframework.data.web.PagedResourcesAssembler;
 import org.springframework.hateoas.PagedModel;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -40,11 +39,15 @@ public class UserController {
     }
 
     @GetMapping("/me")
+
+
     public ResponseEntity<UserModel> getUserDetails(Authentication authentication){
         return userService.getUser(authentication);
     }
 
     @PutMapping("update-role/{userName}/{role}")
+
+
     public ResponseEntity<ApiResponse> updateUserRole(@PathVariable("userName") String userName,
                                                       @PathVariable("role") String role,
                                                       Authentication currentUser){
@@ -52,6 +55,8 @@ public class UserController {
     }
 
     @PutMapping("disable-account/{userName}")
+
+
     public ResponseEntity<ApiResponse> disableAccount(@PathVariable("userName") String userName){
         return userService.disableAccount(userName);
     }
